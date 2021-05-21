@@ -1,4 +1,4 @@
-require 'sinatra'
+require 'kaniko'
 require 'json'
 
 get '/' do	
@@ -6,7 +6,7 @@ get '/' do
 	ret = <<-EOF
 	<html>
 		<head>
-			<title>Sinatra - Hello World!</title>
+			<title>kaniko - Hello World!</title>
 		</head>
 		<body>
 			<h1>Hello, #{name}!</h1>
