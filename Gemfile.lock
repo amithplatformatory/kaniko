@@ -18,7 +18,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  sinatra
+  kaniko
 
 BUNDLED WITH
    2.1.4
