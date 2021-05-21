@@ -1,24 +1,25 @@
+---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: dockerhub-service
 secrets:
-  - name: dockercreds
+  - name: dockercreds # Create secret for your container registry
 
-----
+---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: kaniko-git
+  name: sinatra-hello-world-git
 spec:
   type: git
   params:
     - name: revision
       value: main
     - name: url
-      value: https://github.com/amithplatformatory/kaniko
----------
+      value:  https://github.com/amithplatformatory/kaniko
 
+---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
@@ -27,8 +28,10 @@ spec:
   type: image
   params:
     - name: url
-      value:amithplatormatory/kaniko-hello-world-demo
-----------
+      value: <DOCKER_USERNAME>/kaniko-hello-world-tekton-demo
+
+---
+
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
@@ -65,7 +68,9 @@ spec:
         - --dockerfile=$(params.pathToDockerFile)
         - --destination=$(resources.outputs.builtImage.url)
         - --context=$(params.pathToContext)
-    -------
+
+---
+
 apiVersion: tekton.dev/v1beta1
 kind: TaskRun
 metadata:
@@ -85,4 +90,4 @@ spec:
     outputs:
       - name: builtImage
         resourceRef:
-                name: kaniko-hello-world-tekton-demo-image
+          name: kaniko-hello-world-tekton-demo-image
