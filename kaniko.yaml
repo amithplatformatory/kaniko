@@ -10,7 +10,7 @@ secrets:
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: sinatra-hello-world-git
+  name: kaniko-hello-world-git
 spec:
   type: git
   params:
